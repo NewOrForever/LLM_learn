@@ -21,6 +21,8 @@
     <module>learn01_langchain4j_AiService</module>
     <module>learn02_langchain4j_chatmemory</module>
     <module>learn02_langchain4j_toolspecification</module>
+    <module>learn03_langchain4j_vector</module>
+    <module>learn04_langchain4j_rag_customer_agent</module>
   </modules>
 
   <properties>
