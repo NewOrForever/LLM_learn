@@ -34,6 +34,7 @@ class AssistantController {
     /**
      * @GetMapping(value = "/fluxChat", produces = TEXT_EVENT_STREAM_VALUE)
      * 这个方式也测试下，看看有什么区别
+     * demo api-key 测试下来这个 stream 方式不支持中文响应呢
      */
     @GetMapping(value = "/fluxChat")
     public Flux<String> fluxChat(String message) {

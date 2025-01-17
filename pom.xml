@@ -24,6 +24,7 @@
     <module>learn04_langchain4j_rag_customer_agent</module>
     <module>learn04_langchain4j_rag_advanced</module>
     <module>learn05_langchain4j_springboot</module>
+    <module>learn06_springAI</module>
   </modules>
 
   <properties>

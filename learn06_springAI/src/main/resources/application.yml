@@ -1,0 +1,50 @@
+spring:
+  ai:
+    openai:
+      # one-api 代理地址及令牌，spring ai 中不需要加 /v1，默认会加
+      # one-api 用的基于 openai 的接口规范，所以不管你使用哪家的 AI 服务
+      # 只要符合 openai 的接口规范，且 one-api 支持对应的 AI 功能，都可以直接在这里配置 openai 就行了
+      base-url: http://localhost:3000
+      api-key: sk-TrQO3wE84wuJEB0z09955aF3A1804964B572C17d4848F397
+      chat:
+        options:
+          # 模型名称，可以在 one-api 的渠道中查看
+          # 例如：deepseek-chat 或是智谱的 glm-4
+          #model: deepseek-chat
+          # model: glm-4
+          model: gemini-2.0-flash-exp
+
+      image: # 图片模型
+        base-url: http://localhost:3000
+        api-key: sk-TrQO3wE84wuJEB0z09955aF3A1804964B572C17d4848F397
+        options:
+         model: wanx-v1
+
+      # spring ai 中支持的音频 provider 是 OpenAI 和 Azure OpenAI
+      # one-api 中不支持音频功能，不能配置 one-api
+      audio: # 音频模型 - 语音转文字
+        transcription:
+          base-url: https://api.openai.com
+          api-key: i-have-no-key
+          options:
+            model: whisper-1 # 默认就是 whisper-1 模型，@see org.springframework.ai.openai.api.OpenAiAudioApi.WhisperModel.WHISPER_1
+        speech: # 音频模型 - 文字转语音
+          base-url: https://api.openai.com
+          api-key: i-have-no-key
+          options:
+            model: tts-1 # 默认就是 tts-1 模型，@see org.springframework.ai.openai.api.OpenAiAudioApi.TtsModel.TTS_1
+
+      embedding:
+        base-url: http://localhost:3000
+        api-key: sk-TrQO3wE84wuJEB0z09955aF3A1804964B572C17d4848F397
+        options:
+          model: text-embedding-v3
+
+# 如果你想使用智谱的 AI 服务（或者因为 one-api 中没有接入智谱的特殊功能），可以直接配置智谱的 AI 服务
+#    zhipuai:
+#      chat:
+#        base-url: http://
+#        api-key: 123
+#        options:
+#          model: glm-4
+

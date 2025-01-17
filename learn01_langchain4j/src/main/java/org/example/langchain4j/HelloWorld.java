@@ -1,5 +1,6 @@
 package org.example.langchain4j;
 
+import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 
 import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
@@ -18,6 +19,13 @@ public class HelloWorld {
                 .apiKey("demo")
                 .modelName(GPT_4_O_MINI)
                 .build();
+        /*
+        // 使用 one-api 代理时需要加上 /v1
+        ChatLanguageModel chat = OpenAiChatModel.builder()
+                .baseUrl("http://101.126.54.128:8100/v1")
+                .apiKey("sk-KhjZ7aIN88gn0Hk5EeB4Fb82Ca46425186285e341aB570C3")
+                .modelName("glm-4")
+                .build();*/
         /*String answer = chat.generate("你好，你是谁？");
         System.out.println(answer);
         System.out.println("------");
