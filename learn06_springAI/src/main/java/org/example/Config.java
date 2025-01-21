@@ -54,8 +54,12 @@ public class Config {
      * 如果我不想在 pom.xml 中排除 OpenAI 或 ZhiPuAI 的依赖，那么我就得使用 @Primary 注解来指定默认的 ChatModel
      * 下面的代码直接是复制 {@link ZhiPuAiAutoConfiguration#zhiPuAiChatModel} 方法
      *
-     * 如果要多个模型配合使用，可以把 {@link ChatClientAutoConfiguration#chatClientBuilder} 方法复制出来然后自己配置需要的模型
-     * 或者不用 {@link ChatClient}，直接使用 {@link ChatModel}
+     * 如果要多个模型配合使用：
+     *  - 可以把 {@link ChatClientAutoConfiguration#chatClientBuilder} 方法复制出来然后自己配置需要的模型
+     *  - 推荐：不用 {@link ChatClient}，直接使用 {@link ChatModel}，但是需要 spring.ai.chat.client.enable = false 关闭自动装配 {@link ChatClient}
+     *  - 推荐：使用 {@link ChatClient}，但是需要自己创建 {@link ChatClient}，也需要 spring.ai.chat.client.enable = false 关闭自动装配 {@link ChatClient}
+     *      - 通过 {@link ChatClient.Builder} 创建 {@link ChatClient}
+     *      - 通过 {@link ChatClient#create(ChatModel)} 使用默认的 builder 创建 {@link ChatClient}
      */
 /*
 

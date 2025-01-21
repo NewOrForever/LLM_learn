@@ -1,0 +1,10 @@
+spring:
+  ai:
+    openai:
+      base-url: http://localhost:3000
+      api-key: sk-TrQO3wE84wuJEB0z09955aF3A1804964B572C17d4848F397
+      chat:
+        options:
+          model: glm-4-plus
+          # functions: [ "dateService" ]
+          # functionCallbacks 不能用，会报错，因为他绑定的 FunctionCallback 是一个接口，而不是一个具体的实现类
