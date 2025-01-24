@@ -39,7 +39,10 @@ public class ToolWithChatClientController {
     @RequestMapping("/functionTest2")
     public String functionTest2(String message) {
         // 直接自定义 Prompt
-        Prompt prompt = new Prompt(message, OpenAiChatOptions.builder().function("dateService").build());
+        Prompt prompt = new Prompt(message,
+                OpenAiChatOptions.builder()
+                        .function("dateService").build()
+        );
         return chatClient.prompt(prompt).call().content();
     }
 
