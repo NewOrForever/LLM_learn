@@ -26,6 +26,7 @@
     <module>learn05_langchain4j_springboot</module>
     <module>learn06_springAI</module>
     <module>learn07_springAI_tools</module>
+    <module>learn07_springAI_chatclient</module>
   </modules>
 
   <properties>
