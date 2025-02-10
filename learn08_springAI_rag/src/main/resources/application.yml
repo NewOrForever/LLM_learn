@@ -1,0 +1,19 @@
+spring:
+  ai:
+    openai:
+      base-url: http://localhost:3000
+      api-key: sk-TrQO3wE84wuJEB0z09955aF3A1804964B572C17d4848F397
+      chat:
+        options:
+          model: qwen-max-latest # qwen-deepseek-chat 转发到通义千问渠道 -> 内部再设置模型重定向 qwen-deepseek-chat -> deepseek-v3
+      embedding:
+        base-url: http://localhost:3000
+        api-key: sk-TrQO3wE84wuJEB0z09955aF3A1804964B572C17d4848F397
+        options:
+          # 通义千问的向量化模型
+          model: text-embedding-v3
+
+
+
+
+

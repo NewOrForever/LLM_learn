@@ -27,6 +27,7 @@
     <module>learn06_springAI</module>
     <module>learn07_springAI_tools</module>
     <module>learn07_springAI_chatclient</module>
+    <module>learn08_springAI_rag</module>
   </modules>
 
   <properties>

@@ -74,7 +74,7 @@ public class ZhiPuAIController {
 
         Prompt prompt = new Prompt(new UserMessage(message));
         ChatResponse response = chatModel.call(prompt);
-        return response.getResult().getOutput().getContent();
+        return response.getResult().getOutput().getText();
     }
 
     @GetMapping(value = "/stream/chat", produces = "text/html;charset=UTF-8")
@@ -158,7 +158,6 @@ public class ZhiPuAIController {
                 "/api/paas/v4/chat/completions", "/api/paas/v4/embeddings",
                 RestClient.builder(), WebClient.builder(), RetryUtils.DEFAULT_RESPONSE_ERROR_HANDLER);
 
-
         OpenAiEmbeddingOptions options = OpenAiEmbeddingOptions.builder()
                 .model("Embedding-3")
                 .build();
@@ -194,7 +193,7 @@ public class ZhiPuAIController {
             System.out.println(media.getData());
         });
         System.out.println(response);
-        return response.getResult().getOutput().getContent();
+        return response.getResult().getOutput().getText();
 
     }
 
@@ -229,7 +228,7 @@ public class ZhiPuAIController {
         byte[] audioData = response.getResult().getOutput().getMedia().get(0).getDataAsByteArray();
         Files.write(Paths.get("C:\\Users\\Admin\\Desktop\\output.wav"), audioData);
 
-        return response.getResult().getOutput().getContent();
+        return response.getResult().getOutput().getText();
     }
 
     /**
@@ -256,7 +255,7 @@ public class ZhiPuAIController {
                         .outputAudio(new AudioParameters(AudioParameters.Voice.ALLOY, AudioParameters.AudioResponseFormat.WAV))
                         .build()));
 
-        String text = response.getResult().getOutput().getContent(); // audio transcript
+        String text = response.getResult().getOutput().getText(); // audio transcript
         System.out.println(text);
 
         byte[] waveAudio = response.getResult().getOutput().getMedia().get(0).getDataAsByteArray(); // audio data
