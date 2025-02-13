@@ -5,6 +5,12 @@ import org.springframework.ai.chat.client.DefaultChatClient;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.client.advisor.RetrievalAugmentationAdvisor;
 import org.springframework.ai.chat.client.advisor.api.AdvisedRequest;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.evaluation.EvaluationRequest;
+import org.springframework.ai.evaluation.EvaluationResponse;
+import org.springframework.ai.evaluation.RelevancyEvaluator;
+import org.springframework.ai.model.Content;
 import org.springframework.ai.rag.Query;
 import org.springframework.ai.rag.generation.augmentation.ContextualQueryAugmenter;
 import org.springframework.ai.rag.preretrieval.query.expansion.MultiQueryExpander;
@@ -15,8 +21,12 @@ import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+
+import java.util.List;
 
 /**
  * ClassName:QuestionAnswerAdvisorTestController
@@ -37,8 +47,8 @@ public class GeneralRagTestController {
     @Autowired
     private ChatClient.Builder chatClientBuilder;
 
-    @RequestMapping("/search")
-    public String search(String message) {
+    @RequestMapping(value = "/search", produces = "text/html;charset=UTF-8")
+    public Flux<String> search(String message) {
 
         RetrievalAugmentationAdvisor ragAdvisor = RetrievalAugmentationAdvisor.builder()
                 /**
@@ -50,7 +60,7 @@ public class GeneralRagTestController {
                 // QueryExpander 组件使用 MultiQueryExpander，对 Query 扩展出 多个 Query
                 .queryExpander(MultiQueryExpander.builder().chatClientBuilder(chatClientBuilder).numberOfQueries(3).build())
                 // DocumentRetriever 组件使用 VectorStoreDocumentRetriever，使用 VectorStore 进行检索
-                .documentRetriever(VectorStoreDocumentRetriever.builder().vectorStore(vectorStore).build())
+                .documentRetriever(VectorStoreDocumentRetriever.builder().vectorStore(vectorStore).similarityThreshold(0.7).build())
                 // DocumentJoiner 组件使用 ConcatenationDocumentJoiner，将检索到的多个 Document 进行拼接
                 .documentJoiner(new ConcatenationDocumentJoiner())
                 /**
@@ -64,10 +74,10 @@ public class GeneralRagTestController {
                 .build();
 
         return chatClient.prompt()
+                .system("用中文回答")
                 .user(message)
                 .advisors(ragAdvisor)
-                .call().content();
+                .stream().content();
     }
-
 
 }
