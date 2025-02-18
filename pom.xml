@@ -28,6 +28,8 @@
     <module>learn07_springAI_tools</module>
     <module>learn07_springAI_chatclient</module>
     <module>learn08_springAI_rag</module>
+    <module>learn09_langchain4j_ollama</module>
+    <module>learn09_springAI_ollama</module>
   </modules>
 
   <properties>

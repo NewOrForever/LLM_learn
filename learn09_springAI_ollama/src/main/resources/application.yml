@@ -1,0 +1,13 @@
+spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: deepseek-r1:8b
+      embedding:
+        model: nomic-embed-text:latest
+
+
+
+
+
